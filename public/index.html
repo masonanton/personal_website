@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name - Personal Website</title>
+  <title>Mason B. Anton - Portfolio</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Optionally include a Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Animated Canvas Background -->
-  <canvas id="backgroundCanvas"></canvas>
+  <!-- Scroll to Top Button -->
+  <div id="scrollToTop" title="Scroll to Top">↑</div>
 
   <!-- Header and Navigation -->
   <header>
-    <h1>Your Name</h1>
+    <h1>Mason B. Anton</h1>
     <nav>
       <ul>
         <li><a href="#home" class="nav-link">Home</a></li>
@@ -24,83 +28,194 @@
     </nav>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <section id="home" class="section">
-      <div class="content">
-        <h2>Welcome</h2>
-        <p>
-          Welcome to my personal website! I'm [Your Name], a [Your Profession]. Explore my website to learn more about me and my work.
-        </p>
-      </div>
-    </section>
+  <!-- Home / Hero Section with Three.js Particle Background -->
+  <section id="home" class="section hero">
+    <div id="heroCanvasContainer"></div>
+    <div class="hero-content">
+      <h2>Welcome to My World</h2>
+      <p>
+        Fusion • Physics • Space • Powerlifting • Nature<br />
+        Overengineering in Code and Life
+      </p>
+    </div>
+  </section>
 
-    <section id="about" class="section">
-      <div class="content">
-        <h2>About Me</h2>
-        <p>
-          [Include some interesting facts about yourself from your resume. For example: "I have traveled to over 20 countries and am passionate about creating innovative software solutions."]
-        </p>
-      </div>
-    </section>
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="content">
+      <h2>About Me</h2>
+      <p>
+        I'm Mason B. Anton—a passionate innovator merging the realms of nuclear fusion, modern physics, and cutting-edge software engineering. As a dual major in Computer Science and Applied Mathematics with a minor in Physics at Vanderbilt University, I thrive on solving complex challenges and pushing technological boundaries.
+      </p>
+      <p>
+        Whether I’m leading a team building a nuclear fusion reactor, writing neutronics simulations, or powerlifting to surpass my physical limits, I approach every challenge with determination and creativity.
+      </p>
+    </div>
+  </section>
 
-    <section id="resume" class="section">
-      <div class="content">
-        <h2>Resume</h2>
-        <p>
-          [Insert resume details here: education, work experience, skills, etc.]
-        </p>
-        <ul>
-          <li><strong>Education:</strong> Bachelor in [Field] from [University]</li>
-          <li><strong>Experience:</strong> [Job Title] at [Company Name]</li>
-          <li><strong>Skills:</strong> JavaScript, Node.js, HTML, CSS, and more.</li>
-        </ul>
+  <!-- Resume Section with Tabbed Interface -->
+  <section id="resume" class="section">
+    <div class="content">
+      <h2>Resume</h2>
+      <div class="tabs">
+        <button class="tab-link active" data-tab="education">Education</button>
+        <button class="tab-link" data-tab="experience">Experience</button>
+        <button class="tab-link" data-tab="leadership">Leadership</button>
+        <button class="tab-link" data-tab="skills">Skills &amp; Interests</button>
       </div>
-    </section>
-
-    <section id="projects" class="section">
-      <div class="content">
-        <h2>Projects</h2>
-        <p>Check out some of my work:</p>
-        <div class="project-list">
-          <div class="project-item">
-            <h3>Project One</h3>
-            <p>Description of project one.</p>
-          </div>
-          <div class="project-item">
-            <h3>Project Two</h3>
-            <p>Description of project two.</p>
-          </div>
-          <!-- Add more projects as needed -->
+      <div class="tab-content active" id="education">
+        <h3>Education</h3>
+        <div class="resume-entry">
+          <h4>Vanderbilt University, School of Engineering</h4>
+          <p><em>Nashville, TN</em></p>
+          <p>Bachelor of Science in Computer Science, Bachelor of Science in Applied Math, Minor in Physics (May 2027)</p>
+          <p>Cornelius Vanderbilt Scholar – Awarded with a 4-year full tuition scholarship and $7,000 stipend for a summer experience</p>
+          <ul>
+            <li>GPA: 3.94/4.0 | Dean’s List</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <h4>Mahwah High School</h4>
+          <p><em>Mahwah, NJ</em></p>
+          <p>Valedictorian in the 2023 Class of 192 students (June 2023)</p>
+          <ul>
+            <li>GPA: 104.2/100 | ACT: 35</li>
+          </ul>
         </div>
       </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="content">
-        <h2>Contact Me</h2>
-        <p>Feel free to reach out!</p>
-        <form id="contactForm">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required />
-
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-
-          <button type="submit">Send</button>
-        </form>
+      <div class="tab-content" id="experience">
+        <h3>Professional Experience</h3>
+        <div class="resume-entry">
+          <h4>Vanderbilt Fusion Project – Chief Executive Officer</h4>
+          <p><em>Nashville, TN | November 2024 - Present</em></p>
+          <ul>
+            <li>Orchestrate engineering efforts for the only fully undergraduate group in the country building a nuclear fusion reactor</li>
+            <li>Perform outreach and pitch to industry-leading companies, executives, and professors for sponsorship opportunities and support</li>
+            <li>Facilitate communication between the organization, university, and state safety board to secure reactor operational approval</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <h4>Vanderbilt Fusion Project – Computational Physics Team Leader</h4>
+          <p><em>Nashville, TN | December 2023 - Present</em></p>
+          <ul>
+            <li>Research and develop future applications of IEC fusion devices such as radiation testing and medical isotope production</li>
+            <li>Lead a team of 10 in writing neutronics code to create preliminary simulations for safety and optimization efforts</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <h4>Vanderbilt Fusion Project – Advanced Concepts Team Member</h4>
+          <p><em>Nashville, TN | September 2023 - November 2024</em></p>
+          <ul>
+            <li>Developed technologies to maximize the efficiency of a given IEC fusion device design (e.g., anode layer ion gun)</li>
+            <li>Mentored new members in creating a miniature, desktop-sized high-vacuum plasma device to learn fusion and engineering fundamentals</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <h4>Vanderbilt Engineers Without Borders – Engineering Team Member</h4>
+          <p><em>Nashville, TN | October 2023 - May 2024</em></p>
+          <ul>
+            <li>Designed a water pipeline using EPANET and AutoCAD for a rural town in Nicaragua serving 100 residents</li>
+            <li>Upgraded communications with grant and alumni networks to increase both funding and awareness</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <h4>Camp Ramaquois – Head Counselor</h4>
+          <p><em>Pomona, NY | June 2021 - August 2024</em></p>
+          <ul>
+            <li>Mentored and supervised groups of 12-20 campers, ensuring their safety and positive learning experiences</li>
+            <li>Collaborated to design games and coach sports teams—winning the league softball championship twice</li>
+            <li>Customized activities for campers with specific social or physical needs</li>
+          </ul>
+        </div>
       </div>
-    </section>
-  </main>
+      <div class="tab-content" id="leadership">
+        <h3>Leadership</h3>
+        <div class="resume-entry">
+          <h4>Vanderbilt American Nuclear Society – Founder/President</h4>
+          <p><em>Nashville, TN | November 2024 - Present</em></p>
+          <ul>
+            <li>Founded the Vanderbilt chapter of ANS to create a collaborative makerspace for nuclear industry enthusiasts</li>
+            <li>Host events and initiatives to raise awareness for nuclear energy and impart technical skills</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <h4>Sigma Nu Sigma Chapter – President</h4>
+          <p><em>Nashville, TN | November 2024 - Present</em></p>
+          <ul>
+            <li>Provide strategic leadership to engage 80+ fraternity members in philanthropic, academic, and social efforts</li>
+            <li>Manage a budget exceeding $80,000 per semester while balancing financial aid expansion and operational expenses</li>
+            <li>Serve as the primary liaison between the national fraternity, university, and chapter</li>
+          </ul>
+        </div>
+        <div class="resume-entry">
+          <h4>Kappa Theta Pi Rho Chapter – Vice President of Social Engagement</h4>
+          <p><em>Nashville, TN | October 2024 - Present</em></p>
+          <ul>
+            <li>Coordinate inter- and intra-fraternity social events to connect pre-professional computer science students with industry professionals</li>
+            <li>Plan networking workshops and panels exposing students to technology fields</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab-content" id="skills">
+        <h3>Skills &amp; Interests</h3>
+        <ul>
+          <li><strong>Languages:</strong> C++, Java, Python, MATLAB, HTML, CSS. (Also fluent in Spanish.)</li>
+          <li><strong>Tools:</strong> NumPy, SciPy, Pandas, OpenMC, AutoCAD, Git, GitHub, Computational Modeling &amp; Simulations.</li>
+          <li><strong>Interests:</strong> Powerlifting, Backpacking, Guitar, Thrifting, Good Will Hunting, Modern Physics.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="content">
+      <h2>Projects</h2>
+      <p>Explore projects where I merge advanced physics with creative coding:</p>
+      <!-- Fusion Reactor Simulation (Three.js) -->
+      <div class="project-item" id="fusionSimulationContainer">
+        <h3>Fusion Reactor Simulation</h3>
+        <p>An interactive 3D simulation representing the dynamic energy of nuclear fusion.</p>
+        <div id="fusionSimulation"></div>
+      </div>
+      <!-- Particle Playground (2D Canvas) -->
+      <div class="project-item">
+        <h3>Particle Playground</h3>
+        <p>A physics-based interactive simulation that responds to your mouse, showcasing principles of modern physics.</p>
+        <canvas id="particleCanvas"></canvas>
+      </div>
+      <!-- Add additional projects as desired -->
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="content">
+      <h2>Contact Me</h2>
+      <p>Feel free to reach out for collaborations or just to say hi!</p>
+      <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Your Name. All Rights Reserved.</p>
+    <p>&copy; 2025 Mason B. Anton. All Rights Reserved.</p>
   </footer>
 
+  <!-- Include Three.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+  <!-- Main Script -->
   <script src="script.js"></script>
 </body>
 </html>

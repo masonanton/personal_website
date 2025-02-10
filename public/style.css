@@ -1,130 +1,192 @@
-/* Reset defaults */
+/* Global Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
   
-  /* Full-screen canvas background */
-  #backgroundCanvas {
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #0d0d0d;
+    color: #eee;
+    line-height: 1.6;
+  }
+  
+  /* Links */
+  a {
+    color: #1abc9c;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #16a085;
+  }
+  
+  /* Header & Navigation */
+  header {
     position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 15px 20px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 {
+    font-size: 1.8em;
+    color: #fff;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Scroll To Top Button */
+  #scrollToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #1abc9c;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    transition: opacity 0.3s;
+  }
+  
+  /* Section & Content */
+  .section {
+    padding: 100px 20px;
+    min-height: 100vh;
+    position: relative;
+  }
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+  .section h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #1abc9c;
+    text-align: center;
+  }
+  
+  /* Hero Section */
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  #heroCanvasContainer {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
   }
-  
-  /* Basic body styling */
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #f0f0f0;
-    background: #111;
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding-top: 200px;
+  }
+  .hero-content h2 {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+  .hero-content p {
+    font-size: 1.5em;
   }
   
-  /* Header and Navigation */
-  header {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  header h1 {
-    font-size: 1.8em;
-    color: #fff;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #f0f0f0;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  nav a:hover {
-    color: #1abc9c;
-  }
-  
-  /* Main Content */
-  main {
-    padding-top: 100px; /* Offset for fixed header */
-  }
-  
-  .section {
-    padding: 60px 20px;
-    min-height: 100vh;
-  }
-  
-  .section .content {
-    max-width: 800px;
-    margin: auto;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .section h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #1abc9c;
-  }
-  
-  .section p {
-    font-size: 1.1em;
+  /* Resume Tabs */
+  .tabs {
+    text-align: center;
     margin-bottom: 20px;
   }
-  
-  /* Projects Section */
-  .project-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+  .tab-link {
+    background: #222;
+    color: #eee;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  .tab-link:hover,
+  .tab-link.active {
+    background: #1abc9c;
+  }
+  .tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  .resume-entry {
+    margin-bottom: 20px;
+  }
+  .resume-entry h4 {
+    font-size: 1.5em;
+    color: #1abc9c;
+    margin-bottom: 5px;
+  }
+  .resume-entry p {
+    font-style: italic;
+    margin-bottom: 5px;
+  }
+  .resume-entry ul {
+    margin-left: 20px;
   }
   
+  /* Project Items */
   .project-item {
-    flex: 1 1 calc(50% - 20px);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.85);
+    margin-bottom: 30px;
     padding: 20px;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+    border-radius: 10px;
+    transition: transform 0.3s;
   }
-  
   .project-item:hover {
     transform: translateY(-5px);
   }
+  .project-item h3 {
+    color: #1abc9c;
+    margin-bottom: 10px;
+  }
+  #fusionSimulation, #particleCanvas {
+    width: 100%;
+    height: 400px;
+    display: block;
+    margin-top: 15px;
+    border: 2px solid #1abc9c;
+    border-radius: 5px;
+  }
   
-  /* Form Styling */
+  /* Contact Form */
   form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
   }
-  
   form label {
     font-weight: bold;
   }
-  
   form input,
   form textarea {
     padding: 10px;
     border: none;
     border-radius: 5px;
   }
-  
   form button {
     padding: 10px;
     border: none;
@@ -133,9 +195,8 @@
     color: #fff;
     font-size: 1em;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s;
   }
-  
   form button:hover {
     background: #16a085;
   }
@@ -144,13 +205,26 @@
   footer {
     text-align: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85);
   }
   
-  /* Responsive adjustments */
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Responsive Adjustments */
   @media (max-width: 768px) {
-    .project-item {
-      flex: 1 1 100%;
+    nav ul {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hero-content {
+      padding-top: 150px;
+    }
+    .section {
+      padding: 80px 10px;
     }
   }
   

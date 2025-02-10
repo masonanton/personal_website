@@ -1,7 +1,7 @@
 {
     "name": "personal-website",
     "version": "1.0.0",
-    "description": "Personal website built with Node.js, Express, HTML, CSS, and JavaScript",
+    "description": "Personal website for Mason B. Anton showcasing fusion, physics, space, powerlifting & nature.",
     "main": "server.js",
     "scripts": {
       "start": "node server.js"
