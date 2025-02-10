@@ -68,11 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.reset();
   });
 
-  /* Initialize Hero Three.js Starfield */
+  /* Initialize Hero Three.js Starfield with Moon */
   initHeroThreeJS();
 });
 
-/* Hero Three.js Starfield */
+/* Hero Three.js Starfield with Moon */
 function initHeroThreeJS() {
   const container = document.getElementById('heroCanvasContainer');
   const width = container.clientWidth;
@@ -94,20 +94,39 @@ function initHeroThreeJS() {
   }
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-  const material = new THREE.PointsMaterial({
+  const starMaterial = new THREE.PointsMaterial({
     color: 0xffffff,
     size: 1.5,
     transparent: true,
     opacity: 0.7
   });
-  const particles = new THREE.Points(geometry, material);
-  scene.add(particles);
+  const stars = new THREE.Points(geometry, starMaterial);
+  scene.add(stars);
+
+  // Add ambient and directional light for the moon
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  directionalLight.position.set(50, 50, 50);
+  scene.add(directionalLight);
+
+  // Create a moon (a simple sphere)
+  const moonGeometry = new THREE.SphereGeometry(5, 32, 32);
+  const moonMaterial = new THREE.MeshPhongMaterial({
+    color: 0x888888,
+    shininess: 10
+  });
+  const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+  moon.position.set(20, 10, -30);
+  scene.add(moon);
 
   camera.position.z = 50;
 
   function animate() {
     requestAnimationFrame(animate);
-    particles.rotation.y += 0.0005;
+    stars.rotation.y += 0.0005;
+    moon.rotation.y += 0.001;
     renderer.render(scene, camera);
   }
   animate();
