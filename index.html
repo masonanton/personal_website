@@ -11,6 +11,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <!-- Global Starfield Background Container (visible on all slides) -->
+  <div id="starCanvasContainer"></div>
+
+  <!-- Custom Cursor: A Simple Moon (circular with radial gradient) -->
+  <div id="customCursor"></div>
+
   <!-- Fixed Header -->
   <header>
     <div class="header-container">
@@ -29,10 +35,8 @@
   <!-- Carousel Container -->
   <div class="carousel">
     <!-- Slide 1: Home/Hero -->
-    <section id="home" class="carousel-slide hero">
-      <!-- Three.js canvas will be inserted here -->
-      <div id="heroCanvasContainer"></div>
-      <div class="hero-content">
+    <section id="home" class="carousel-slide centered">
+      <div class="content hero-content">
         <h2>Welcome.</h2>
         <p>
           Computer Science &amp; Applied Mathematics<br />
@@ -40,7 +44,7 @@
         </p>
       </div>
     </section>
-    <!-- Slide 2: About (centered vertically) -->
+    <!-- Slide 2: About -->
     <section id="about" class="carousel-slide centered">
       <div class="content">
         <h2>About</h2>
@@ -49,7 +53,7 @@
         </p>
       </div>
     </section>
-    <!-- Slide 3: Resume (centered vertically) -->
+    <!-- Slide 3: Resume -->
     <section id="resume" class="carousel-slide centered">
       <div class="content resume-content">
         <h2>Resume</h2>
@@ -163,7 +167,7 @@
         </div>
       </div>
     </section>
-    <!-- Slide 4: Contact (centered vertically) -->
+    <!-- Slide 4: Contact -->
     <section id="contact" class="carousel-slide centered">
       <div class="content">
         <h2>Contact</h2>
@@ -188,8 +192,7 @@
   <button id="prevArrow" class="carousel-arrow">&larr;</button>
   <button id="nextArrow" class="carousel-arrow">&rarr;</button>
 
-  <!-- Scripts: Three.js is loaded first, then your script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-  <script src="script.js"></script>
+  <!-- Load our custom script as an ES module -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>

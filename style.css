@@ -11,11 +11,34 @@ body {
   color: #ccc;
   line-height: 1.6;
   overflow: hidden; /* Prevent body scrolling */
+  cursor: none; /* Hide default cursor */
 }
 
 /* Use Orbitron for headings */
 h1, h2, h3, h4 {
   font-family: 'Orbitron', sans-serif;
+}
+
+/* Global Starfield Container */
+#starCanvasContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+/* Custom Cursor: Simple Crescent-Like Moon (circular with radial gradient) */
+#customCursor {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+  transform: translate(-50%, -50%);
+  z-index: 1200;
 }
 
 /* Header */
@@ -79,7 +102,6 @@ nav a.active {
 }
 
 /* Center content vertically for slides */
-.hero,
 .centered {
   display: flex;
   align-items: center;
@@ -87,24 +109,9 @@ nav a.active {
   text-align: center;
 }
 
-/* Hero Slide */
-.hero {
-  overflow: hidden;
-  color: #fff;
-}
-
-#heroCanvasContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-}
-
+/* Hero Slide Content */
 .hero-content {
-  position: relative;
-  z-index: 1;
+  color: #fff;
 }
 
 .hero-content h2 {
@@ -125,7 +132,14 @@ nav a.active {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* For the Resume section, left-align the paragraphs and lists */
+/* Constrain Resume Content Height & Enable Scrolling */
+.resume-content {
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* For the Resume section, left-align paragraphs and lists */
 .resume-content p,
 .resume-content ul {
   text-align: left;
