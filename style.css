@@ -10,33 +10,31 @@ body {
   background: linear-gradient(to bottom, #121212, #1a1a1a);
   color: #ccc;
   line-height: 1.6;
+  overflow: hidden; /* Prevent body scrolling */
 }
 
-.container {
-  width: 90%;
-  max-width: 1100px;
-  margin: 0 auto;
+/* Use Orbitron for headings */
+h1, h2, h3, h4 {
+  font-family: 'Orbitron', sans-serif;
 }
 
 /* Header */
 header {
   background: rgba(0, 0, 0, 0.9);
-  padding: 15px 0;
   position: fixed;
-  width: 100%;
   top: 0;
+  width: 100%;
   z-index: 1000;
 }
 
-header .container {
+.header-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-header h1 {
-  font-size: 1.8em;
-  color: #fff;
+  padding: 15px;
 }
 
 nav ul {
@@ -54,67 +52,83 @@ nav a {
 
 nav a:hover,
 nav a.active {
-  color: #2980b9;
+  color: #9b59b6;
 }
 
-/* Scroll To Top Button */
-#scrollToTop {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: #2980b9;
-  color: #fff;
-  padding: 10px 15px;
-  border-radius: 50%;
-  cursor: pointer;
+/* Carousel Container */
+.carousel {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100vw;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
   display: none;
-  z-index: 1000;
 }
 
-/* Sections */
-.section {
-  padding: 120px 0;
-  min-height: 100vh;
+/* Carousel Slide */
+.carousel-slide {
+  flex: 0 0 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
   position: relative;
 }
 
-.content {
-  background: rgba(0, 0, 0, 0.85);
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-/* Hero Section */
-.hero {
-  position: relative;
-  overflow: hidden;
+/* Center content vertically for slides */
+.hero,
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+}
+
+/* Hero Slide */
+.hero {
+  overflow: hidden;
+  color: #fff;
 }
 
 #heroCanvasContainer {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
-  padding-top: 150px;
-  color: #fff;
 }
 
 .hero-content h2 {
   font-size: 3em;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .hero-content p {
   font-size: 1.5em;
+}
+
+/* Content Sections (About, Resume, Contact) */
+.content {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 40px;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* For the Resume section, left-align the paragraphs and lists */
+.resume-content p,
+.resume-content ul {
+  text-align: left;
 }
 
 /* Resume Tabs */
@@ -136,7 +150,7 @@ nav a.active {
 
 .tab-link:hover,
 .tab-link.active {
-  background: #2980b9;
+  background: #9b59b6;
   color: #fff;
 }
 
@@ -155,11 +169,11 @@ nav a.active {
 
 .resume-entry h4 {
   font-size: 1.5em;
-  color: #2980b9;
+  color: #9b59b6;
   margin-bottom: 5px;
 }
 
-.resume-entry p {
+.resume-entry p.meta {
   font-style: italic;
   margin-bottom: 5px;
 }
@@ -173,6 +187,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  text-align: left;
 }
 
 form label {
@@ -191,7 +206,7 @@ form button {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background: #2980b9;
+  background: #9b59b6;
   color: #fff;
   font-size: 1em;
   cursor: pointer;
@@ -199,7 +214,30 @@ form button {
 }
 
 form button:hover {
-  background: #2471a3;
+  background: #8e44ad;
+}
+
+/* Carousel Navigation Arrows - Futuristic, no boxes */
+.carousel-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 3em;
+  color: #9b59b6;
+  cursor: pointer;
+  z-index: 1100;
+  text-shadow: 0 0 10px rgba(155, 89, 182, 0.8);
+  padding: 0 10px;
+}
+
+#prevArrow {
+  left: 10px;
+}
+
+#nextArrow {
+  right: 10px;
 }
 
 /* Footer */
@@ -218,14 +256,11 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+  }
   nav ul {
     flex-direction: column;
     gap: 10px;
-  }
-  .hero-content {
-    padding-top: 100px;
-  }
-  .section {
-    padding: 80px 0;
   }
 }

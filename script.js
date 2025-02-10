@@ -1,49 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
-  /* Smooth scrolling for navigation links */
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetID = this.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetID);
-      if (targetSection) {
-        window.scrollTo({
-          top: targetSection.offsetTop - 80, // account for fixed header
-          behavior: 'smooth'
-        });
-      }
+  /* --- Carousel Navigation --- */
+  const carousel = document.querySelector('.carousel');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const prevArrow = document.getElementById('prevArrow');
+  const nextArrow = document.getElementById('nextArrow');
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+
+  function scrollToSlide(index) {
+    const slideWidth = window.innerWidth;
+    carousel.scrollTo({
+      left: slideWidth * index,
+      behavior: 'smooth'
     });
+    currentSlide = index;
+  }
+
+  prevArrow.addEventListener('click', () => {
+    let nextIndex = currentSlide - 1;
+    if (nextIndex < 0) nextIndex = totalSlides - 1;
+    scrollToSlide(nextIndex);
   });
 
-  /* Dynamic navigation highlighting using Intersection Observer */
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const observerOptions = { threshold: 0.6 };
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(link => {
-          link.classList.toggle(
-            'active',
-            link.getAttribute('href').substring(1) === entry.target.id
-          );
-        });
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach(section => observer.observe(section));
-
-  /* Scroll to top button */
-  const scrollBtn = document.getElementById('scrollToTop');
-  window.addEventListener('scroll', () => {
-    scrollBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
-  });
-  scrollBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  nextArrow.addEventListener('click', () => {
+    let nextIndex = currentSlide + 1;
+    if (nextIndex >= totalSlides) nextIndex = 0;
+    scrollToSlide(nextIndex);
   });
 
-  /* Resume tabs functionality */
+  // Update currentSlide on manual scroll (if the user swipes)
+  carousel.addEventListener('scroll', () => {
+    const index = Math.round(carousel.scrollLeft / window.innerWidth);
+    currentSlide = index;
+  });
+
+  /* --- Resume Tabs Functionality --- */
   const tabLinks = document.querySelectorAll('.tab-link');
   const tabContents = document.querySelectorAll('.tab-content');
 
@@ -56,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* Contact form handling (demo) */
+  /* --- Contact Form Handling (Demo) --- */
   const contactForm = document.getElementById('contactForm');
   contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -68,73 +59,67 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.reset();
   });
 
-  /* Initialize Hero Three.js Starfield with Moon */
+  /* --- Initialize Hero Three.js Starfield --- */
   initHeroThreeJS();
 });
 
-/* Hero Three.js Starfield with Moon */
+/* --- Three.js Starfield with Interactive Parallax --- */
 function initHeroThreeJS() {
   const container = document.getElementById('heroCanvasContainer');
-  const width = container.clientWidth;
-  const height = container.clientHeight;
+  // Use full viewport dimensions
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000);
   const renderer = new THREE.WebGLRenderer({ alpha: true });
   renderer.setSize(width, height);
   container.appendChild(renderer.domElement);
 
-  // Create starfield particles
-  const particlesCount = 800;
-  const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(particlesCount * 3);
-  for (let i = 0; i < particlesCount; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 200;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 200;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 200;
+  // Create a starfield
+  const starsCount = 5000;
+  const starsGeometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(starsCount * 3);
+  for (let i = 0; i < starsCount; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 1000;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 1000;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 1000;
   }
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  starsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-  const starMaterial = new THREE.PointsMaterial({
+  const starsMaterial = new THREE.PointsMaterial({
     color: 0xffffff,
-    size: 1.5,
-    transparent: true,
-    opacity: 0.7
+    size: 1.2,
+    sizeAttenuation: true
   });
-  const stars = new THREE.Points(geometry, starMaterial);
-  scene.add(stars);
+  const starField = new THREE.Points(starsGeometry, starsMaterial);
+  scene.add(starField);
 
-  // Add ambient and directional light for the moon
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-  scene.add(ambientLight);
+  camera.position.z = 1;
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-  directionalLight.position.set(50, 50, 50);
-  scene.add(directionalLight);
-
-  // Create a moon (a simple sphere)
-  const moonGeometry = new THREE.SphereGeometry(5, 32, 32);
-  const moonMaterial = new THREE.MeshPhongMaterial({
-    color: 0x888888,
-    shininess: 10
+  // Interactive parallax variables
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - window.innerWidth / 2);
+    mouseY = (e.clientY - window.innerHeight / 2);
   });
-  const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-  moon.position.set(20, 10, -30);
-  scene.add(moon);
-
-  camera.position.z = 50;
 
   function animate() {
     requestAnimationFrame(animate);
-    stars.rotation.y += 0.0005;
-    moon.rotation.y += 0.001;
+    // Slowly rotate the starfield
+    starField.rotation.x += 0.0001;
+    starField.rotation.y += 0.0001;
+    // Apply a subtle parallax effect based on mouse movement
+    camera.position.x += ((mouseX * 0.0005) - camera.position.x) * 0.05;
+    camera.position.y += ((-mouseY * 0.0005) - camera.position.y) * 0.05;
     renderer.render(scene, camera);
   }
   animate();
 
-  // Adjust on window resize
+  // Update renderer and camera on window resize
   window.addEventListener('resize', () => {
-    const newWidth = container.clientWidth;
-    const newHeight = container.clientHeight;
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
     renderer.setSize(newWidth, newHeight);
     camera.aspect = newWidth / newHeight;
     camera.updateProjectionMatrix();

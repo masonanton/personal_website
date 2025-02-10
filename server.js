@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from the root directory
+// Serve static files from the repository root
 app.use(express.static(__dirname));
 
 app.get('*', (req, res) => {
@@ -13,3 +13,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+

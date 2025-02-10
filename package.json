@@ -4,10 +4,9 @@
     "description": "Personal website for Mason B. Anton showcasing fusion, physics, space, powerlifting & nature.",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js"
+        "start": "node server.js"
     },
     "dependencies": {
-      "express": "^4.18.2"
+        "express": "^4.21.2"
     }
-  }
-  
+}

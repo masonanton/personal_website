@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mason B. Anton</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Orbitron for headings and Roboto for body -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Scroll To Top Button -->
-  <div id="scrollToTop" title="Scroll to Top">↑</div>
-
-  <!-- Header and Navigation -->
+  <!-- Fixed Header -->
   <header>
-    <div class="container">
+    <div class="header-container">
       <h1>Mason B. Anton</h1>
       <nav>
         <ul>
@@ -29,167 +26,170 @@
     </div>
   </header>
 
-  <!-- Home / Hero Section -->
-  <section id="home" class="section hero">
-    <!-- The canvas container for Three.js starfield & moon -->
-    <div id="heroCanvasContainer"></div>
-    <div class="hero-content">
-      <h2>Welcome.</h2>
-      <p>Computer Science &amp; Applied Mathematics<br />Vanderbilt University</p>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="section">
-    <div class="container content">
-      <h2>About</h2>
-      <p>
-        I am Mason B. Anton, a dedicated student and emerging professional in computer science, applied mathematics, and physics. My academic journey at Vanderbilt University is defined by rigorous scholarship and hands‐on leadership—from nuclear fusion research to computational modeling.
-      </p>
-    </div>
-  </section>
-
-  <!-- Resume Section -->
-  <section id="resume" class="section">
-    <div class="container content">
-      <h2>Resume</h2>
-      <div class="tabs">
-        <button class="tab-link active" data-tab="education">Education</button>
-        <button class="tab-link" data-tab="experience">Experience</button>
-        <button class="tab-link" data-tab="leadership">Leadership</button>
-        <button class="tab-link" data-tab="skills">Skills &amp; Interests</button>
+  <!-- Carousel Container -->
+  <div class="carousel">
+    <!-- Slide 1: Home/Hero -->
+    <section id="home" class="carousel-slide hero">
+      <!-- Three.js canvas will be inserted here -->
+      <div id="heroCanvasContainer"></div>
+      <div class="hero-content">
+        <h2>Welcome.</h2>
+        <p>
+          Computer Science &amp; Applied Mathematics<br />
+          Vanderbilt University
+        </p>
       </div>
-      <div class="tab-content active" id="education">
-        <h3>Education</h3>
-        <div class="resume-entry">
-          <h4>Vanderbilt University, School of Engineering</h4>
-          <p><em>Nashville, TN</em></p>
-          <p>B.S. in Computer Science, B.S. in Applied Mathematics, Minor in Physics (May 2027)</p>
-          <p>Cornelius Vanderbilt Scholar – Awarded a 4-year full tuition scholarship and $7,000 summer stipend</p>
-          <ul>
-            <li>GPA: 3.94/4.0 | Dean’s List</li>
-          </ul>
+    </section>
+    <!-- Slide 2: About (centered vertically) -->
+    <section id="about" class="carousel-slide centered">
+      <div class="content">
+        <h2>About</h2>
+        <p>
+          I am Mason B. Anton, a dedicated student and emerging professional in computer science, applied mathematics, and physics. My academic journey at Vanderbilt University is defined by rigorous scholarship and hands‑on leadership—from nuclear fusion research to computational modeling.
+        </p>
+      </div>
+    </section>
+    <!-- Slide 3: Resume (centered vertically) -->
+    <section id="resume" class="carousel-slide centered">
+      <div class="content resume-content">
+        <h2>Resume</h2>
+        <div class="tabs">
+          <button class="tab-link active" data-tab="education">Education</button>
+          <button class="tab-link" data-tab="experience">Experience</button>
+          <button class="tab-link" data-tab="leadership">Leadership</button>
+          <button class="tab-link" data-tab="skills">Skills &amp; Interests</button>
         </div>
-        <div class="resume-entry">
-          <h4>Mahwah High School</h4>
-          <p><em>Mahwah, NJ</em></p>
-          <p>Valedictorian, Class of 2023</p>
+        <div class="tab-content active" id="education">
+          <h3>Education</h3>
+          <div class="resume-entry">
+            <h4>Vanderbilt University, School of Engineering</h4>
+            <p class="meta"><em>Nashville, TN</em></p>
+            <p>
+              B.S. in Computer Science, B.S. in Applied Mathematics, Minor in Physics (May 2027)
+            </p>
+            <p>
+              Cornelius Vanderbilt Scholar – Awarded a 4‑year full tuition scholarship and $7,000 summer stipend
+            </p>
+            <ul>
+              <li>GPA: 3.94/4.0 | Dean’s List</li>
+            </ul>
+          </div>
+          <div class="resume-entry">
+            <h4>Mahwah High School</h4>
+            <p class="meta"><em>Mahwah, NJ</em></p>
+            <p>Valedictorian, Class of 2023</p>
+            <ul>
+              <li>GPA: 104.2/100 | ACT: 35</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content" id="experience">
+          <h3>Professional Experience</h3>
+          <div class="resume-entry">
+            <h4>Vanderbilt Fusion Project – Chief Executive Officer</h4>
+            <p class="meta"><em>Nashville, TN | November 2024 - Present</em></p>
+            <ul>
+              <li>Lead an undergraduate team developing a nuclear fusion reactor</li>
+              <li>Secure sponsorships and manage communications with university and regulatory bodies</li>
+            </ul>
+          </div>
+          <div class="resume-entry">
+            <h4>Vanderbilt Fusion Project – Computational Physics Team Leader</h4>
+            <p class="meta"><em>Nashville, TN | December 2023 - Present</em></p>
+            <ul>
+              <li>Develop simulations for IEC fusion device applications</li>
+              <li>Lead a team of 10 in neutronics code development for safety and optimization</li>
+            </ul>
+          </div>
+          <div class="resume-entry">
+            <h4>Vanderbilt Fusion Project – Advanced Concepts Team Member</h4>
+            <p class="meta"><em>Nashville, TN | September 2023 - November 2024</em></p>
+            <ul>
+              <li>Engineered efficiency improvements, including an anode layer ion gun</li>
+              <li>Mentored new team members in plasma device design</li>
+            </ul>
+          </div>
+          <div class="resume-entry">
+            <h4>Vanderbilt Engineers Without Borders – Engineering Team Member</h4>
+            <p class="meta"><em>Nashville, TN | October 2023 - May 2024</em></p>
+            <ul>
+              <li>Designed a water pipeline for a rural community in Nicaragua</li>
+              <li>Enhanced communications to boost funding and project awareness</li>
+            </ul>
+          </div>
+          <div class="resume-entry">
+            <h4>Camp Ramaquois – Head Counselor</h4>
+            <p class="meta"><em>Pomona, NY | June 2021 - August 2024</em></p>
+            <ul>
+              <li>Supervised and mentored groups at summer camp</li>
+              <li>Coordinated team activities and led the softball team to consecutive championships</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content" id="leadership">
+          <h3>Leadership</h3>
+          <div class="resume-entry">
+            <h4>Vanderbilt American Nuclear Society – Founder/President</h4>
+            <p class="meta"><em>Nashville, TN | November 2024 - Present</em></p>
+            <ul>
+              <li>Established a collaborative makerspace for nuclear industry enthusiasts</li>
+              <li>Organize technical workshops and events</li>
+            </ul>
+          </div>
+          <div class="resume-entry">
+            <h4>Sigma Nu Sigma Chapter – President</h4>
+            <p class="meta"><em>Nashville, TN | November 2024 - Present</em></p>
+            <ul>
+              <li>Lead 80+ fraternity members in academic, philanthropic, and social initiatives</li>
+              <li>Manage budgets exceeding $80,000 per semester</li>
+            </ul>
+          </div>
+          <div class="resume-entry">
+            <h4>Kappa Theta Pi Rho Chapter – Vice President of Social Engagement</h4>
+            <p class="meta"><em>Nashville, TN | October 2024 - Present</em></p>
+            <ul>
+              <li>Coordinate social events connecting computer science students with industry professionals</li>
+              <li>Plan networking and career development workshops</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tab-content" id="skills">
+          <h3>Skills &amp; Interests</h3>
           <ul>
-            <li>GPA: 104.2/100 | ACT: 35</li>
+            <li><strong>Languages:</strong> C++, Java, Python, MATLAB, HTML, CSS; fluent in Spanish</li>
+            <li><strong>Tools:</strong> NumPy, SciPy, Pandas, OpenMC, AutoCAD, Git, GitHub, Computational Modeling &amp; Simulations</li>
+            <li><strong>Interests:</strong> Powerlifting, backpacking, guitar, thrifting, modern physics</li>
           </ul>
         </div>
       </div>
-      <div class="tab-content" id="experience">
-        <h3>Professional Experience</h3>
-        <div class="resume-entry">
-          <h4>Vanderbilt Fusion Project – Chief Executive Officer</h4>
-          <p><em>Nashville, TN | November 2024 - Present</em></p>
-          <ul>
-            <li>Lead an undergraduate team developing a nuclear fusion reactor</li>
-            <li>Secure sponsorships and manage communications with university and regulatory bodies</li>
-          </ul>
-        </div>
-        <div class="resume-entry">
-          <h4>Vanderbilt Fusion Project – Computational Physics Team Leader</h4>
-          <p><em>Nashville, TN | December 2023 - Present</em></p>
-          <ul>
-            <li>Develop simulations for IEC fusion device applications</li>
-            <li>Lead a team of 10 in neutronics code development for safety and optimization</li>
-          </ul>
-        </div>
-        <div class="resume-entry">
-          <h4>Vanderbilt Fusion Project – Advanced Concepts Team Member</h4>
-          <p><em>Nashville, TN | September 2023 - November 2024</em></p>
-          <ul>
-            <li>Engineered efficiency improvements, including an anode layer ion gun</li>
-            <li>Mentored new team members in plasma device design</li>
-          </ul>
-        </div>
-        <div class="resume-entry">
-          <h4>Vanderbilt Engineers Without Borders – Engineering Team Member</h4>
-          <p><em>Nashville, TN | October 2023 - May 2024</em></p>
-          <ul>
-            <li>Designed a water pipeline for a rural community in Nicaragua</li>
-            <li>Enhanced communications to boost funding and project awareness</li>
-          </ul>
-        </div>
-        <div class="resume-entry">
-          <h4>Camp Ramaquois – Head Counselor</h4>
-          <p><em>Pomona, NY | June 2021 - August 2024</em></p>
-          <ul>
-            <li>Supervised and mentored groups at summer camp</li>
-            <li>Coordinated team activities and led the softball team to consecutive championships</li>
-          </ul>
-        </div>
+    </section>
+    <!-- Slide 4: Contact (centered vertically) -->
+    <section id="contact" class="carousel-slide centered">
+      <div class="content">
+        <h2>Contact</h2>
+        <p>If you'd like to get in touch, please send a message below.</p>
+        <form id="contactForm">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+  
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+  
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+  
+          <button type="submit">Send</button>
+        </form>
       </div>
-      <div class="tab-content" id="leadership">
-        <h3>Leadership</h3>
-        <div class="resume-entry">
-          <h4>Vanderbilt American Nuclear Society – Founder/President</h4>
-          <p><em>Nashville, TN | November 2024 - Present</em></p>
-          <ul>
-            <li>Established a collaborative makerspace for nuclear industry enthusiasts</li>
-            <li>Organize technical workshops and events</li>
-          </ul>
-        </div>
-        <div class="resume-entry">
-          <h4>Sigma Nu Sigma Chapter – President</h4>
-          <p><em>Nashville, TN | November 2024 - Present</em></p>
-          <ul>
-            <li>Lead 80+ fraternity members in academic, philanthropic, and social initiatives</li>
-            <li>Manage budgets exceeding $80,000 per semester</li>
-          </ul>
-        </div>
-        <div class="resume-entry">
-          <h4>Kappa Theta Pi Rho Chapter – Vice President of Social Engagement</h4>
-          <p><em>Nashville, TN | October 2024 - Present</em></p>
-          <ul>
-            <li>Coordinate social events connecting computer science students with industry professionals</li>
-            <li>Plan networking and career development workshops</li>
-          </ul>
-        </div>
-      </div>
-      <div class="tab-content" id="skills">
-        <h3>Skills &amp; Interests</h3>
-        <ul>
-          <li><strong>Languages:</strong> C++, Java, Python, MATLAB, HTML, CSS; fluent in Spanish</li>
-          <li><strong>Tools:</strong> NumPy, SciPy, Pandas, OpenMC, AutoCAD, Git, GitHub, Computational Modeling &amp; Simulations</li>
-          <li><strong>Interests:</strong> Powerlifting, backpacking, guitar, thrifting, modern physics</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section">
-    <div class="container content">
-      <h2>Contact</h2>
-      <p>If you'd like to get in touch, please send a message below.</p>
-      <form id="contactForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
+  <!-- Carousel Navigation Arrows (Futuristic style) -->
+  <button id="prevArrow" class="carousel-arrow">&larr;</button>
+  <button id="nextArrow" class="carousel-arrow">&rarr;</button>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Mason B. Anton. All Rights Reserved.</p>
-    </div>
-  </footer>
-
-  <!-- Three.js Library -->
+  <!-- Scripts: Three.js is loaded first, then your script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-  <!-- Main Script -->
   <script src="script.js"></script>
 </body>
 </html>
