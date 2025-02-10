@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name - Personal Website</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated Canvas Background -->
+  <canvas id="backgroundCanvas"></canvas>
+
+  <!-- Header and Navigation -->
+  <header>
+    <h1>Your Name</h1>
+    <nav>
+      <ul>
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#resume" class="nav-link">Resume</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section id="home" class="section">
+      <div class="content">
+        <h2>Welcome</h2>
+        <p>
+          Welcome to my personal website! I'm [Your Name], a [Your Profession]. Explore my website to learn more about me and my work.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="content">
+        <h2>About Me</h2>
+        <p>
+          [Include some interesting facts about yourself from your resume. For example: "I have traveled to over 20 countries and am passionate about creating innovative software solutions."]
+        </p>
+      </div>
+    </section>
+
+    <section id="resume" class="section">
+      <div class="content">
+        <h2>Resume</h2>
+        <p>
+          [Insert resume details here: education, work experience, skills, etc.]
+        </p>
+        <ul>
+          <li><strong>Education:</strong> Bachelor in [Field] from [University]</li>
+          <li><strong>Experience:</strong> [Job Title] at [Company Name]</li>
+          <li><strong>Skills:</strong> JavaScript, Node.js, HTML, CSS, and more.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="content">
+        <h2>Projects</h2>
+        <p>Check out some of my work:</p>
+        <div class="project-list">
+          <div class="project-item">
+            <h3>Project One</h3>
+            <p>Description of project one.</p>
+          </div>
+          <div class="project-item">
+            <h3>Project Two</h3>
+            <p>Description of project two.</p>
+          </div>
+          <!-- Add more projects as needed -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="content">
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out!</p>
+        <form id="contactForm">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Your Name. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
