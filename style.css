@@ -70,12 +70,13 @@ nav a {
   color: #ccc;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: color 0.3s, text-shadow 0.3s;
 }
 
 nav a:hover,
 nav a.active {
   color: #9b59b6;
+  text-shadow: 0 0 10px rgba(155, 89, 182, 0.8);
 }
 
 /* Carousel Container */
@@ -123,7 +124,7 @@ nav a.active {
   font-size: 1.5em;
 }
 
-/* Content Sections (About, Resume, Contact) */
+/* Content Sections (About, Resume, Contact, Pong) */
 .content {
   background: rgba(0, 0, 0, 0.85);
   padding: 40px;
@@ -133,10 +134,12 @@ nav a.active {
 }
 
 /* Constrain Resume Content Height & Enable Scrolling */
+/* Added top padding to buffer content from fixed header */
 .resume-content {
   max-height: calc(100vh - 150px);
   overflow-y: auto;
   padding-right: 10px;
+  padding-top: 70px;
 }
 
 /* For the Resume section, left-align paragraphs and lists */
@@ -216,6 +219,13 @@ form textarea {
   font-size: 1em;
 }
 
+/* Added cool focus effect on form fields */
+form input:focus,
+form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px #9b59b6;
+}
+
 form button {
   padding: 10px;
   border: none;
@@ -252,6 +262,84 @@ form button:hover {
 
 #nextArrow {
   right: 10px;
+}
+
+/* Carousel Indicators (New Feature) */
+.carousel-indicators {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 1100;
+}
+
+.carousel-indicators .indicator {
+  width: 12px;
+  height: 12px;
+  background: #555;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.carousel-indicators .indicator.active {
+  background: #9b59b6;
+}
+
+/* Ripple Effect on Click (New Feature) */
+.ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(155, 89, 182, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: scale(0);
+  animation: rippleEffect 0.6s linear;
+  z-index: 1500;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Pong Canvas Styling */
+#pongCanvas {
+  border: 2px solid #9b59b6;
+  display: block;
+  margin: 20px auto;
+}
+
+/* Center Pong Slide Content specifically */
+#pong .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Reset Score and Pause Button Styling */
+#resetScore,
+#pauseGame {
+  margin: 20px auto 0;
+  display: block;
+  background-color: #9b59b6;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#resetScore:hover,
+#pauseGame:hover {
+  background-color: #8e44ad;
 }
 
 /* Footer */

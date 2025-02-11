@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       behavior: 'smooth'
     });
     currentSlide = index;
+    updateIndicators(currentSlide);
   }
 
   prevArrow.addEventListener('click', () => {
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   carousel.addEventListener('scroll', () => {
     const index = Math.round(carousel.scrollLeft / window.innerWidth);
     currentSlide = index;
+    updateIndicators(currentSlide);
   });
 
   /* --- Resume Tabs Functionality --- */
@@ -71,7 +73,50 @@ document.addEventListener('DOMContentLoaded', () => {
   initGlobalStarfield();
 
   /* --- Start Burst Particle Spawner (every 2 seconds) --- */
-  setInterval(spawnBurstParticle, 2000);
+  setInterval(spawnBurstParticle, 1250);
+
+  /* --- New Feature: Carousel Slide Indicators --- */
+  const carouselIndicatorsContainer = document.createElement('div');
+  carouselIndicatorsContainer.classList.add('carousel-indicators');
+  for (let i = 0; i < totalSlides; i++) {
+    const indicator = document.createElement('span');
+    indicator.classList.add('indicator');
+    if (i === currentSlide) {
+      indicator.classList.add('active');
+    }
+    indicator.dataset.slide = i;
+    indicator.addEventListener('click', () => {
+      scrollToSlide(i);
+    });
+    carouselIndicatorsContainer.appendChild(indicator);
+  }
+  document.body.appendChild(carouselIndicatorsContainer);
+
+  function updateIndicators(activeIndex) {
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((ind, idx) => {
+      if(idx === activeIndex) {
+        ind.classList.add('active');
+      } else {
+        ind.classList.remove('active');
+      }
+    });
+  }
+
+  /* --- New Feature: Ripple Effect on Click --- */
+  document.addEventListener('click', function(e) {
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    ripple.style.left = e.clientX + 'px';
+    ripple.style.top = e.clientY + 'px';
+    document.body.appendChild(ripple);
+    setTimeout(() => {
+      ripple.remove();
+    }, 600); // Duration should match the animation duration in CSS
+  });
+
+  /* --- Initialize Pong Game --- */
+  initPongGame();
 });
 
 /* --- Global Starfield with Interactive Parallax, Swell, and Repulsion --- */
@@ -200,4 +245,230 @@ function spawnBurstParticle() {
     }
   }
   updateBurst();
+}
+
+/* --- New Feature: Pong Game --- */
+function initPongGame() {
+  const canvas = document.getElementById('pongCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // Game settings
+  const paddleWidth = 10;
+  const paddleHeight = 100;
+  const ballRadius = 8;
+  const ballSpeed = 5;
+
+  // Scores
+  let playerScore = 0;
+  let aiScore = 0;
+
+  // Game control flags
+  let paused = false;
+  let waiting = false;
+
+  // Player's paddle (left)
+  let playerPaddle = {
+    x: 10,
+    y: canvas.height / 2 - paddleHeight / 2,
+    width: paddleWidth,
+    height: paddleHeight
+  };
+
+  // AI paddle (right)
+  let aiPaddle = {
+    x: canvas.width - paddleWidth - 10,
+    y: canvas.height / 2 - paddleHeight / 2,
+    width: paddleWidth,
+    height: paddleHeight
+  };
+
+  // Ball
+  let ball = {
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    radius: ballRadius,
+    speed: ballSpeed,
+    dx: ballSpeed,
+    dy: 3
+  };
+
+  // Key controls
+  let keys = {};
+  document.addEventListener('keydown', (e) => {
+    keys[e.key] = true;
+  });
+  document.addEventListener('keyup', (e) => {
+    keys[e.key] = false;
+  });
+
+  // Track player's previous paddle position for movement effect
+  let prevPlayerPaddleY = playerPaddle.y;
+
+  function resetBall() {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
+    // Randomize starting direction
+    ball.dx = (Math.random() > 0.5 ? 1 : -1) * ball.speed;
+    ball.dy = (Math.random() * 4 - 2);
+  }
+
+  function update() {
+    // If paused or waiting, skip updating game state
+    if (paused || waiting) return;
+
+    // Update player's paddle and record movement
+    let oldPlayerY = playerPaddle.y;
+    if (keys['ArrowUp']) {
+      playerPaddle.y -= 7;
+    }
+    if (keys['ArrowDown']) {
+      playerPaddle.y += 7;
+    }
+    // Keep player paddle in bounds
+    if (playerPaddle.y < 0) playerPaddle.y = 0;
+    if (playerPaddle.y + playerPaddle.height > canvas.height)
+      playerPaddle.y = canvas.height - playerPaddle.height;
+    let paddleMovement = playerPaddle.y - oldPlayerY;
+    prevPlayerPaddleY = playerPaddle.y;
+
+    // Simple AI for right paddle with reduced speed for easier gameplay
+    let targetY = ball.y - aiPaddle.height / 2;
+    let aiSpeed = 2; // Reduced speed
+    if (targetY > aiPaddle.y) {
+      aiPaddle.y += Math.min(aiSpeed, targetY - aiPaddle.y);
+    } else {
+      aiPaddle.y -= Math.min(aiSpeed, aiPaddle.y - targetY);
+    }
+    if (aiPaddle.y < 0) aiPaddle.y = 0;
+    if (aiPaddle.y + aiPaddle.height > canvas.height)
+      aiPaddle.y = canvas.height - aiPaddle.height;
+
+    // Update ball position
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    // Ball collision with top and bottom walls
+    if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+      ball.dy = -ball.dy;
+    }
+
+    // Collision with player's paddle
+    if (
+      ball.x - ball.radius < playerPaddle.x + playerPaddle.width &&
+      ball.x - ball.radius > playerPaddle.x &&
+      ball.y > playerPaddle.y &&
+      ball.y < playerPaddle.y + playerPaddle.height
+    ) {
+      // Calculate collision point (normalized)
+      let collidePoint = ball.y - (playerPaddle.y + playerPaddle.height / 2);
+      collidePoint = collidePoint / (playerPaddle.height / 2);
+      // Calculate reflection angle (max 45°)
+      let angleRad = collidePoint * (Math.PI / 4);
+      // Set ball velocity and add paddle movement effect
+      ball.dx = ball.speed * Math.cos(angleRad);
+      ball.dy = ball.speed * Math.sin(angleRad) + paddleMovement * 0.3;
+      if (ball.dx < 0) ball.dx = -ball.dx;
+      ball.x = playerPaddle.x + playerPaddle.width + ball.radius;
+    }
+
+    // Collision with AI paddle
+    if (
+      ball.x + ball.radius > aiPaddle.x &&
+      ball.x + ball.radius < aiPaddle.x + aiPaddle.width &&
+      ball.y > aiPaddle.y &&
+      ball.y < aiPaddle.y + aiPaddle.height
+    ) {
+      let collidePoint = ball.y - (aiPaddle.y + aiPaddle.height / 2);
+      collidePoint = collidePoint / (aiPaddle.height / 2);
+      let angleRad = collidePoint * (Math.PI / 4);
+      ball.dx = -ball.speed * Math.cos(angleRad);
+      ball.dy = ball.speed * Math.sin(angleRad);
+      ball.x = aiPaddle.x - ball.radius;
+    }
+
+    // Scoring and waiting period
+    if (ball.x - ball.radius < 0) {
+      // AI scores
+      aiScore++;
+      waiting = true;
+      setTimeout(() => {
+        resetBall();
+        waiting = false;
+      }, 2000); // 2 second delay
+    } else if (ball.x + ball.radius > canvas.width) {
+      // Player scores
+      playerScore++;
+      waiting = true;
+      setTimeout(() => {
+        resetBall();
+        waiting = false;
+      }, 2000); // 2 second delay
+    }
+  }
+
+  function draw() {
+    // Clear the canvas
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw player paddle
+    ctx.fillStyle = '#9b59b6';
+    ctx.fillRect(playerPaddle.x, playerPaddle.y, playerPaddle.width, playerPaddle.height);
+
+    // Draw AI paddle
+    ctx.fillStyle = '#9b59b6';
+    ctx.fillRect(aiPaddle.x, aiPaddle.y, aiPaddle.width, aiPaddle.height);
+
+    // Draw ball
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+    ctx.closePath();
+
+    // Draw futuristic scoreboard
+    ctx.font = "bold 36px Orbitron, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#9b59b6";
+    ctx.shadowColor = "#9b59b6";
+    ctx.shadowBlur = 20;
+    ctx.fillText(playerScore + "   :   " + aiScore, canvas.width / 2, 50);
+    ctx.shadowBlur = 0;
+
+    // If paused, overlay a "PAUSED" message
+    if (paused) {
+      ctx.font = "bold 48px Orbitron, sans-serif";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+      ctx.fillText("PAUSED", canvas.width / 2, canvas.height / 2);
+    }
+  }
+
+  function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+  }
+
+  // Reset Score Button functionality
+  const resetScoreButton = document.getElementById('resetScore');
+  if (resetScoreButton) {
+    resetScoreButton.addEventListener('click', () => {
+      playerScore = 0;
+      aiScore = 0;
+      resetBall();
+    });
+  }
+
+  // Pause/Resume Button functionality
+  const pauseButton = document.getElementById('pauseGame');
+  if (pauseButton) {
+    pauseButton.addEventListener('click', () => {
+      paused = !paused;
+      pauseButton.textContent = paused ? "Resume" : "Pause";
+    });
+  }
+
+  resetBall();
+  gameLoop();
 }
