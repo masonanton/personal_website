@@ -8,5 +8,17 @@
     },
     "dependencies": {
         "express": "^4.21.2"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/masonanton/personal_website.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/masonanton/personal_website/issues"
+    },
+    "homepage": "https://github.com/masonanton/personal_website#readme",
+    "devDependencies": {}
 }

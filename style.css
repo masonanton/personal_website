@@ -1,368 +1,140 @@
-/* Reset & Base Styles */
+/* Reset & Base */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; padding: 0; box-sizing: border-box;
 }
-
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
 body {
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(to bottom, #121212, #1a1a1a);
   color: #ccc;
-  line-height: 1.6;
-  overflow: hidden; /* Prevent body scrolling */
-  cursor: none; /* Hide default cursor */
+  overflow-y: scroll;
+  cursor: none;
 }
-
-/* Use Orbitron for headings */
 h1, h2, h3, h4 {
   font-family: 'Orbitron', sans-serif;
 }
 
-/* Global Starfield Container */
+/* Starfield & Custom Cursor */
 #starCanvasContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh; z-index: -1;
 }
-
-/* Custom Cursor: Simple Crescent-Like Moon (circular with radial gradient) */
 #customCursor {
   position: fixed;
-  width: 40px;
-  height: 40px;
-  pointer-events: none;
-  border-radius: 50%;
+  width: 40px; height: 40px;
+  pointer-events: none; border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #fff, #ccc);
   transform: translate(-50%, -50%);
-  z-index: 1200;
+  z-index: 1000;
 }
 
 /* Header */
 header {
-  background: rgba(0, 0, 0, 0.9);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
+  position: fixed; top: 0; width: 100%;
+  background: rgba(0,0,0,0.9); z-index: 1000;
 }
-
 .header-container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
   padding: 15px;
 }
-
 nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+  list-style: none; display: flex; gap: 20px;
 }
-
 nav a {
-  color: #ccc;
-  text-decoration: none;
-  font-weight: 500;
+  color: #ccc; text-decoration: none; font-weight: 500;
   transition: color 0.3s, text-shadow 0.3s;
 }
-
-nav a:hover,
-nav a.active {
-  color: #9b59b6;
-  text-shadow: 0 0 10px rgba(155, 89, 182, 0.8);
+nav a:hover {
+  color: #9b59b6; text-shadow: 0 0 10px rgba(155,89,182,0.8);
 }
 
-/* Carousel Container */
-.carousel {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  width: 100vw;
-  height: 100vh;
-  scroll-behavior: smooth;
+/* Scroll Arrows */
+.scroll-arrow {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  background: transparent; border: none;
+  font-size: 2em; color: #9b59b6; cursor: pointer;
+  z-index: 1100; text-shadow: 0 0 5px rgba(155,89,182,0.8);
 }
+#upArrow { top: 10px; }
+#downArrow { bottom: 10px; }
+.scroll-arrow.hidden { display: none; }
 
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-/* Carousel Slide */
-.carousel-slide {
-  flex: 0 0 100vw;
-  height: 100vh;
+/* Sections */
+main { padding-top: 70px; }
+.section {
   scroll-snap-align: start;
-  position: relative;
+  min-height: 100vh;
+  padding: 60px 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.text-box {
+  background: rgba(0,0,0,0.7);
+  padding: 30px; border-radius: 8px;
+  max-width: 900px; text-align: center;
+}
+.text-box h2 { margin-bottom: 15px; font-size: 2.5em; }
+.text-box p { font-size: 1.2em; line-height: 1.4; }
+.text-box ul { list-style: none; padding: 0; }
+.text-box ul li { margin: 8px 0; }
+.text-box ul a {
+  color: #9b59b6; text-decoration: none; font-weight: 500;
 }
 
-/* Center content vertically for slides */
-.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* Hero Slide Content */
-.hero-content {
-  color: #fff;
-}
-
-.hero-content h2 {
-  font-size: 3em;
-  margin-bottom: 20px;
-}
-
-.hero-content p {
-  font-size: 1.5em;
-}
-
-/* Content Sections (About, Resume, Contact, Pong) */
-.content {
-  background: rgba(0, 0, 0, 0.85);
-  padding: 40px;
-  max-width: 800px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-/* Constrain Resume Content Height & Enable Scrolling */
-/* Added top padding to buffer content from fixed header */
-.resume-content {
-  max-height: calc(100vh - 150px);
-  overflow-y: auto;
-  padding-right: 10px;
-  padding-top: 70px;
-}
-
-/* For the Resume section, left-align paragraphs and lists */
-.resume-content p,
-.resume-content ul {
-  text-align: left;
-}
-
-/* Resume Tabs */
-.tabs {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.tab-link {
-  background: #222;
-  color: #ccc;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  margin: 0 5px;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-
-.tab-link:hover,
-.tab-link.active {
-  background: #9b59b6;
-  color: #fff;
-}
-
-.tab-content {
-  display: none;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-.resume-entry {
-  margin-bottom: 20px;
-}
-
-.resume-entry h4 {
-  font-size: 1.5em;
-  color: #9b59b6;
-  margin-bottom: 5px;
-}
-
-.resume-entry p.meta {
-  font-style: italic;
-  margin-bottom: 5px;
-}
-
-.resume-entry ul {
-  margin-left: 20px;
-}
-
-/* Contact Form */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  text-align: left;
-}
-
-form label {
-  font-weight: 500;
-}
-
-form input,
-form textarea {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-/* Added cool focus effect on form fields */
-form input:focus,
-form textarea:focus {
-  outline: none;
-  box-shadow: 0 0 10px #9b59b6;
-}
-
-form button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background: #9b59b6;
-  color: #fff;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-form button:hover {
-  background: #8e44ad;
-}
-
-/* Carousel Navigation Arrows - Futuristic, no boxes */
-.carousel-arrow {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 3em;
-  color: #9b59b6;
-  cursor: pointer;
-  z-index: 1100;
-  text-shadow: 0 0 10px rgba(155, 89, 182, 0.8);
-  padding: 0 10px;
-}
-
-#prevArrow {
-  left: 10px;
-}
-
-#nextArrow {
-  right: 10px;
-}
-
-/* Carousel Indicators (New Feature) */
-.carousel-indicators {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 1100;
-}
-
-.carousel-indicators .indicator {
-  width: 12px;
-  height: 12px;
-  background: #555;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.carousel-indicators .indicator.active {
-  background: #9b59b6;
-}
-
-/* Ripple Effect on Click (New Feature) */
-.ripple {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: rgba(155, 89, 182, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: scale(0);
-  animation: rippleEffect 0.6s linear;
-  z-index: 1500;
-}
-
-@keyframes rippleEffect {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-/* Pong Canvas Styling */
-#pongCanvas {
+/* Surprise Button */
+.secret-btn {
+  background: none;
   border: 2px solid #9b59b6;
-  display: block;
-  margin: 20px auto;
-}
-
-/* Center Pong Slide Content specifically */
-#pong .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Reset Score and Pause Button Styling */
-#resetScore,
-#pauseGame {
-  margin: 20px auto 0;
-  display: block;
-  background-color: #9b59b6;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
+  color: #9b59b6;
+  font-size: 1.5em;
+  padding: 5px 10px;
+  margin-top: 20px;
   cursor: pointer;
-  transition: background 0.3s;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
 }
-#resetScore:hover,
-#pauseGame:hover {
-  background-color: #8e44ad;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px 0;
-  background: rgba(0, 0, 0, 0.9);
-  color: #777;
+.secret-btn:hover {
+  background: #9b59b6; color: #fff;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Resume Section PDF */
+#resume .text-box {
+  background: transparent;
+  padding: 0;
+  max-width: none;
+  width: 100%;
+}
+.pdf-container {
+  position: relative;
+  width: 90vw;  
+  height: calc(100vh - 140px); /* adjust if header/textbox change */
+  margin: 0 auto;
+}
+.pdf-container iframe {
+  width: 100%; height: 100%;
+  border: 2px solid #9b59b6;
+  border-radius: 5px;
+}
+.pdf-overlay {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  text-indent: -9999px;
+  cursor: pointer;
 }
 
-/* Responsive */
+/* Pong Wrapper */
+.pong-wrapper {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+
+/* Responsive Nav */
 @media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-  }
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-  }
+  .header-container { flex-direction: column; }
+  nav ul { flex-direction: column; gap: 10px; }
 }
