@@ -133,6 +133,38 @@ main { padding-top: 70px; }
   align-items: center; justify-content: center;
 }
 
+/* Home Layout */
+.home-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.home-layout .headshot {
+  flex: 0 1 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-layout .headshot img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px; /* Changed from 50% to 15px */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.home-layout .text-box {
+  flex: 1;
+  max-width: 800px; /* Increased width from 600px to 800px */
+  background: rgba(0,0,0,0.7);
+  padding: 30px;
+  border-radius: 8px;
+  text-align: left;
+}
+
 /* Responsive Nav */
 @media (max-width: 768px) {
   .header-container { flex-direction: column; }
@@ -188,4 +220,9 @@ main { padding-top: 70px; }
 .photo-collage img:hover {
   transform: scale(1.1) rotate(0deg);
   z-index: 10;
+}
+
+/* Style for strong tags that matches the shooting stars color */
+strong {
+  color: #9b59b6;
 }
