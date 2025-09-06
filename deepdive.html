@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deep Dive — Mock Carousel Simulation API</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <div id="starCanvasContainer"></div>
+    <div id="customCursor"></div>
+
+    <header>
+        <div class="header-container">
+            <h1>Mason Anton</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#resume">Resume</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="deep-dive" class="section">
+            <div class="text-box left deep-dive">
+                <h2>Deep Dive — Mock Carousel Simulation API</h2>
+
+                <p>When I joined Radial Theory, one of the thorniest issues was testing automated parking carousels
+                    without
+                    actually touching the hardware. Picture a multi-story tower of cars rotating like a vertical Ferris
+                    wheel —
+                    a single misstep could damage vehicles or halt operations. The existing “simulator” was closer to a
+                    stub: it
+                    glossed over sensors, ignored fault conditions, and gave engineers a false sense of confidence. We
+                    needed
+                    something better, something that captured the reality of hundreds of interconnected states.</p>
+
+                <p>I set out to reimagine the carousel not as a script, but as a living state machine. I began by
+                    mapping every
+                    signal we could read: inverter trips, drive status, pallet occupancy, door sensors. The raw JSON
+                    dumps became
+                    my blueprint, each value showing me how the hardware really thought about itself.</p>
+
+                <figure>
+                    <img src="images/uml1.0.jpeg"
+                        alt="First iteration UML: detailed class model with PLC, sensors, doors, pallets, and JSON mapping"
+                        width="700">
+                    <figcaption><strong>First iteration.</strong> A detailed, exhaustive model that mirrored the JSON
+                        structure almost one-to-one.</figcaption>
+                </figure>
+
+                <p>The first design captured everything — PLC state, every sensor, pallets as objects, even fault codes
+                    — but it
+                    quickly became heavy. Adding features meant plumbing through layers of types, and the simulator felt
+                    more like
+                    a reflection of the API fields than the machine itself. After a few days of pushing against that
+                    friction, I
+                    stepped back to rethink.</p>
+
+                <p>The refactor was about clarity. Instead of modeling every noun in the system, I asked: what are the
+                    verbs and
+                    invariants? Rotate to bay N. Open a door only if safe. Reserve a pallet. Fail closed on alarm. With
+                    that
+                    perspective, I collapsed classes, tightened responsibilities, and let commands drive explicit state
+                    transitions.</p>
+
+                <figure>
+                    <img src="images/uml2.0.jpeg"
+                        alt="Second iteration UML: simplified with PLC, Carousel, Door, Pallets" width="700">
+                    <figcaption><strong>Second iteration.</strong> A leaner model: PLC orchestrates, Carousel owns
+                        motion and sensors, Door enforces interlocks, Pallets form a list.</figcaption>
+                </figure>
+
+                <p>With the simpler core, edge cases became scenarios: what happens if the inverter trips mid-rotation,
+                    or if the
+                    door sensor disagrees with the actuator? Each was encoded directly in the state machine and tested
+                    deterministically.
+                    Logs became narratives of commands and outcomes, easy to replay and debug.</p>
+
+                <figure>
+                    <img src="images/parking carousel.jpg" alt="Real automated parking carousel system" width="700">
+                    <figcaption><strong>The target reality.</strong> A full-scale automated parking carousel — the
+                        system my
+                        simulation had to mirror safely in software.</figcaption>
+                </figure>
+
+                <p>The result was a simulation that felt real. Engineers trusted it enough to use in CI pipelines, cycle
+                    times
+                    dropped, and new features could be prototyped without touching hardware. By refactoring from an
+                    overfit data
+                    model to a clean state machine, I turned a brittle mock into a reliable foundation for scaling to
+                    tandem
+                    carousels, gates, and future hardware variations.</p>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
