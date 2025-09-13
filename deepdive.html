@@ -37,73 +37,70 @@
             <div class="text-box left deep-dive">
                 <h2>Deep Dive — Mock Carousel Simulation API</h2>
 
-                <p>When I joined Radial Theory, one of the thorniest issues was testing automated parking carousels
-                    without
-                    actually touching the hardware. Picture a multi-story tower of cars rotating like a vertical Ferris
-                    wheel —
-                    a single misstep could damage vehicles or halt operations. The existing “simulator” was closer to a
-                    stub: it
-                    glossed over sensors, ignored fault conditions, and gave engineers a false sense of confidence. We
-                    needed
-                    something better, something that captured the reality of hundreds of interconnected states.</p>
+            <h3>The Challenge</h3>
+            <ul>
+                <li>Testing real automated parking carousels was costly and risky.</li>
+                <li>The old “simulator” skipped sensors and fault states → gave false confidence.</li>
+                <li>Needed something that captured hundreds of interconnected states.</li>
+            </ul>
 
-                <p>I set out to reimagine the carousel not as a script, but as a living state machine. I began by
-                    mapping every
-                    signal we could read: inverter trips, drive status, pallet occupancy, door sensors. The raw JSON
-                    dumps became
-                    my blueprint, each value showing me how the hardware really thought about itself.</p>
+            <h3>My Approach (Iteration 1)</h3>
+            <p>I started by treating the carousel as a living state machine, mapping every signal: inverter trips,
+                drive status, pallet occupancy, door sensors. JSON dumps became my blueprint.</p>
 
-                <figure>
-                    <img src="images/uml1.0.jpeg"
-                        alt="First iteration UML: detailed class model with PLC, sensors, doors, pallets, and JSON mapping"
-                        width="700">
-                    <figcaption><strong>First iteration.</strong> A detailed, exhaustive model that mirrored the JSON
-                        structure almost one-to-one.</figcaption>
-                </figure>
+            <figure>
+                <img src="images/uml1.0.jpeg"
+                    alt="First iteration UML: detailed class model with PLC, sensors, doors, pallets, and JSON mapping"
+                    width="650">
+                <figcaption><strong>First Iteration.</strong> Exhaustive model that mirrored JSON structure
+                    one-to-one.</figcaption>
+            </figure>
 
-                <p>The first design captured everything — PLC state, every sensor, pallets as objects, even fault codes
-                    — but it
-                    quickly became heavy. Adding features meant plumbing through layers of types, and the simulator felt
-                    more like
-                    a reflection of the API fields than the machine itself. After a few days of pushing against that
-                    friction, I
-                    stepped back to rethink.</p>
+            <ul>
+                <li>Modeled every component: PLC, sensors, pallets, doors, status objects.</li>
+                <li>Powerful, but <em>too heavy</em> — changes meant plumbing through layers.</li>
+                <li>Simulator reflected API fields more than real machine behavior.</li>
+            </ul>
 
-                <p>The refactor was about clarity. Instead of modeling every noun in the system, I asked: what are the
-                    verbs and
-                    invariants? Rotate to bay N. Open a door only if safe. Reserve a pallet. Fail closed on alarm. With
-                    that
-                    perspective, I collapsed classes, tightened responsibilities, and let commands drive explicit state
-                    transitions.</p>
+            <h3>The Refactor (Iteration 2)</h3>
+            <p>After a few days, I stepped back and asked: what are the verbs and invariants?</p>
 
-                <figure>
-                    <img src="images/uml2.0.jpeg"
-                        alt="Second iteration UML: simplified with PLC, Carousel, Door, Pallets" width="700">
-                    <figcaption><strong>Second iteration.</strong> A leaner model: PLC orchestrates, Carousel owns
-                        motion and sensors, Door enforces interlocks, Pallets form a list.</figcaption>
-                </figure>
+            <ul>
+                <li>Rotate to bay N.</li>
+                <li>Open door only if safe.</li>
+                <li>Reserve a pallet.</li>
+                <li>Fail closed on alarm.</li>
+            </ul>
 
-                <p>With the simpler core, edge cases became scenarios: what happens if the inverter trips mid-rotation,
-                    or if the
-                    door sensor disagrees with the actuator? Each was encoded directly in the state machine and tested
-                    deterministically.
-                    Logs became narratives of commands and outcomes, easy to replay and debug.</p>
+            <figure>
+                <img src="images/uml2.0.jpeg" alt="Second iteration UML: simplified with PLC, Carousel, Door, Pallets"
+                    width="650">
+                <figcaption><strong>Second Iteration.</strong> Simplified: PLC orchestrates, Carousel owns motion &
+                    sensors, Door enforces interlocks, Pallets form a list.</figcaption>
+            </figure>
 
-                <figure>
-                    <img src="images/parking carousel.jpg" alt="Real automated parking carousel system" width="700">
-                    <figcaption><strong>The target reality.</strong> A full-scale automated parking carousel — the
-                        system my
-                        simulation had to mirror safely in software.</figcaption>
-                </figure>
+            <ul>
+                <li>Collapsed classes, tightened responsibilities.</li>
+                <li>Commands drove explicit state transitions → clearer, safer.</li>
+                <li>Edge cases became scenarios: inverter trip mid-rotation, door sensor mismatch, simultaneous
+                    entries.</li>
+                <li>Deterministic logs allowed easy replay and debugging.</li>
+            </ul>
 
-                <p>The result was a simulation that felt real. Engineers trusted it enough to use in CI pipelines, cycle
-                    times
-                    dropped, and new features could be prototyped without touching hardware. By refactoring from an
-                    overfit data
-                    model to a clean state machine, I turned a brittle mock into a reliable foundation for scaling to
-                    tandem
-                    carousels, gates, and future hardware variations.</p>
-            </div>
+            <h3>The Reality We Simulated</h3>
+            <figure>
+                <img src="images/parking carousel.jpg" alt="Real automated parking carousel system" width="650">
+                <figcaption><strong>The Target Reality.</strong> Full-scale parking carousel — the system my
+                    simulation had to mirror safely in software.</figcaption>
+            </figure>
+
+            <h3>Impact</h3>
+            <ul>
+                <li>Simulation “felt real” — trusted enough to run in CI pipelines.</li>
+                <li>Cycle times dropped dramatically.</li>
+                <li>New features prototyped without touching hardware.</li>
+                <li>Foundation for scaling to tandem carousels, gates, and future variations.</li>
+            </ul>
         </section>
     </main>
 
