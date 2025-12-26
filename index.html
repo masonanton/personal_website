@@ -1,123 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mason Anton</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap"
-    rel="stylesheet" />
 </head>
-
 <body>
   <div id="starCanvasContainer"></div>
-  <div id="customCursor"></div>
 
-  <header>
-    <div class="header-container">
-      <h1>Mason Anton</h1>
-      <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#resume">Resume</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+  <nav>
+    <div class="nav-content">
+      <div class="logo">MASON ANTON</div>
+      <ul class="nav-links">
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#experience">EXP</a></li>
+        <li><a href="#projects">WORK</a></li>
+        <li><a href="#contact">STATUS</a></li>
+      </ul>
     </div>
-  </header>
-
-  <button id="upArrow" class="scroll-arrow hidden">↑</button>
-  <button id="downArrow" class="scroll-arrow">↓</button>
+  </nav>
 
   <main>
-    <!-- Home -->
-    <section id="home" class="section">
-      <div class="home-layout">
-        <div class="headshot">
-          <img src="images/headshot.jpg" alt="Mason's Headshot" />
-        </div>
-        <div class="text-box">
-          <h2>Hey, I'm Mason Anton!</h2>
-          <p>
-            I'm a <strong>junior at Vanderbilt</strong> studying computer science, math, and physics. <br />
-            I <strong>lead the Vanderbilt Fusion Project</strong> in building a desktop-sized nuclear fusion reactor.
-            <br />
-            I <strong>interned at Radial Theory</strong> this past summer, building software for a small parking
-            startup. <br />
-            Scroll to learn more!
+    <section id="home">
+      <div class="collage-wrapper">
+        <img src="images/pic1.JPG" class="collage-img c1" alt="">
+        <img src="images/pic2.JPG" class="collage-img c2" alt="">
+        <img src="images/pic3.JPG" class="collage-img c3" alt="">
+        <img src="images/pic4.JPG" class="collage-img c4" alt="">
+        <img src="images/pic5.JPG" class="collage-img c5" alt="">
+        <img src="images/pic6.JPG" class="collage-img c6" alt="">
+      </div>
+
+      <div class="container hero-layout">
+        <div class="hero-text">
+          <h1>HELLO!</h1>
+          
+          <p class="subtitle">
+            I am a Software Engineer & Student at <span class="highlight">Vanderbilt University</span>.
           </p>
+          <p>
+            Interned as a Software Engineer last summer at <b>Radial Theory</b>. Formerly led the <b>Vanderbilt Fusion Project</b> to build a nuclear fusion reactor.
+          </p>
+          
+          <a href="#contact" class="btn">GET IN TOUCH</a>
+        </div>
+        
+        <div class="hero-img">
+          <img src="images/headshot.jpg" alt="Mason Anton">
         </div>
       </div>
     </section>
 
-    <!-- Experience & Skills -->
-    <section id="experience" class="section">
-      <div class="xp-grid">
-        <!-- Skills / Technical Overview -->
-        <div class="text-box left skills-box">
-          <h2>Experience &amp; Skills</h2>
-          <h3>Technical Overview</h3>
-
-          <div class="skill-block">
-            <h4>Languages</h4>
-            <ul class="pill-list">
-              <li>Python</li>
-              <li>JavaScript/TypeScript</li>
-              <li>C++</li>
-              <li>Java</li>
-              <li>SQL</li>
-              <li>MATLAB</li>
-            </ul>
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">EXPERIENCE</h2>
+        
+        <div class="xp-block">
+          <div class="xp-header">
+            <h3>SOFTWARE ENGINEERING INTERN — RADIAL THEORY</h3>
+            <span class="meta">Summer 2025 · Software Consultancy</span>
           </div>
-
-          <div class="skill-block">
-            <h4>Frameworks / Tools</h4>
-            <ul class="pill-list">
-              <li>React</li>
-              <li>Next.js</li>
-              <li>Node.js</li>
-              <li>Express.js</li>
-              <li>Docker</li>
-              <li>Linux</li>
-              <li>MySQL</li>
-            </ul>
-          </div>
-
-          <div class="skill-block">
-            <h4>Concepts</h4>
-            <ul class="pill-list">
-              <li>OOP</li>
-              <li>Design Patterns</li>
-              <li>Microservices</li>
-              <li>System Design</li>
-              <li>Simulation Modeling</li>
-              <li>DevOps</li>
-            </ul>
-          </div>
-
-          <div class="skill-block">
-            <h4>Other</h4>
-            <ul class="pill-list">
-              <li>Git/GitHub</li>
-              <li>Agile</li>
-              <li>TDD</li>
-              <li>Physics</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Experience -->
-        <div class="xp-list">
-          <div class="text-box left xp-card">
-            <h3>Software Engineering Intern — Radial Theory</h3>
-            <p class="xp-meta">Summer 2025 · Software consultancy (parking-tech clients)</p>
-            <ul class="xp-bullets">
+          <div class="xp-body">
+            <ul>
               <li>Rewrote and optimized a PLC/carousel simulation into modular OOP classes.</li>
               <li>Built a remote-command service bridging system APIs to hardware over SSH.</li>
               <li>Deployed full-stack apps (Node.js + React) in Docker, orchestrated on AWS ECS.</li>
@@ -125,84 +70,125 @@
               <li>Debugged and maintained codebases with tens of thousands of lines.</li>
             </ul>
           </div>
+        </div>
 
-          <div class="text-box left xp-card">
-            <h3>CEO &amp; Software Team Lead — Vanderbilt Fusion Project</h3>
-            <p class="xp-meta">2024–Present · 60-person undergraduate team</p>
-            <ul class="xp-bullets">
+        <div class="xp-block">
+          <div class="xp-header">
+            <h3>CEO & TEAM LEAD — VANDERBILT FUSION PROJECT</h3>
+            <span class="meta">2024–Present · 60-person Team</span>
+          </div>
+          <div class="xp-body">
+            <ul>
               <li>Lead engineering an inertial electrostatic confinement (IEC) fusion reactor project.</li>
               <li>Developing a Fusion Control Panel software for HV supply, vacuum pump, and MFC.</li>
-              <li>Drove unit &amp; incremental testing; achieved sustained plasma for ~3 minutes.</li>
+              <li>Drove unit & incremental testing; achieved sustained plasma for ~3 minutes.</li>
               <li>Spearheaded computational simulations with neutronics codes.</li>
-              <li><a href="https://www.vanderbiltfusion.org/" target="_blank" rel="noopener">Website</a> ·
-                <a href="https://www.linkedin.com/posts/vanderbiltfusionproject_fusionenergy-vanderbiltuniversity-daretogrow-ugcPost-7320557807139790848-7U1c?utm_source=share&utm_medium=member_desktop&rcm=ACoAADhbnu0BGITsvLqTTgPVVSkxzOQRaaqQbio"
-                  target="_blank" rel="noopener">Plasma announcement video</a>
+              <li>
+                <a href="https://www.vanderbiltfusion.org/" target="_blank">Website</a> · 
+                <a href="https://www.linkedin.com/posts/vanderbiltfusionproject_fusionenergy-vanderbiltuniversity-daretogrow-ugcPost-7320557807139790848-7U1c" target="_blank">Announcement Video</a>
               </li>
             </ul>
           </div>
+        </div>
 
-          <div class="text-box left xp-card compact">
-            <h3>Other Experience</h3>
-            <ul class="xp-bullets two-col">
+        <div class="xp-block">
+          <div class="xp-header">
+            <h3>OTHER ROLES</h3>
+          </div>
+          <div class="xp-body">
+            <ul>
               <li>Founder/President — Vanderbilt American Nuclear Society</li>
               <li>President — Sigma Nu (Sigma Chapter)</li>
               <li>Head Counselor — Camp Ramaquois</li>
             </ul>
           </div>
         </div>
+
+        <div class="skills-section">
+          <h3>TECHNICAL OVERVIEW</h3>
+          <div class="skills-grid">
+            <div class="skill-box">
+              <h4>LANGUAGES</h4>
+              <p>Python, JavaScript/TypeScript, C++, Java, SQL, MATLAB</p>
+            </div>
+            <div class="skill-box">
+              <h4>FRAMEWORKS/TOOLS</h4>
+              <p>React, Next.js, Node.js, Express.js, Docker, Linux, MySQL</p>
+            </div>
+            <div class="skill-box">
+              <h4>CONCEPTS</h4>
+              <p>OOP, Design Patterns, Microservices, System Design, Simulation Modeling, DevOps</p>
+            </div>
+            <div class="skill-box">
+              <h4>OTHER</h4>
+              <p>Git/GitHub, Agile, TDD, Physics</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- Projects -->
-    <section id="projects" class="section">
-      <div class="projects-layout">
-        <div class="text-box">
-          <h2>Stuff I've Done</h2>
-          <ul>
-            <li><a href="https://vanderbiltfusion.org" target="_blank">Vanderbilt Fusion Project</a></li>
-            <li><a href="https://github.com/masonanton/fusion-control-panel" target="_blank">Fusion Reactor Control
-                Software</a></li>
-            <li><a href="https://github.com/masonanton/VFP-Simulations" target="_blank">Neutronics Simulation Code</a>
-            </li>
-            <li><a href="deepdive.html">A deep dive into one of my internship projects</a></li>
-            <li><a href="https://www.openpowerlifting.org/u/masonanton" target="_blank">Powerlifting Meets</a></li>
-          </ul>
-          <button id="secretBtn" class="secret-btn">what's this?</button>
-        </div>
-
-        <!-- Collage -->
-        <div class="photo-collage">
-          <img src="images/pic1.JPG" alt="Photo 1" />
-          <img src="images/pic2.JPG" alt="Photo 2" />
-          <img src="images/pic3.JPG" alt="Photo 3" />
-          <img src="images/pic4.JPG" alt="Photo 4" />
-          <img src="images/pic5.JPG" alt="Photo 5" />
-          <img src="images/pic6.JPG" alt="Photo 6" />
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">STUFF I'VE DONE</h2>
+        <div class="list-group">
+          <a href="https://vanderbiltfusion.org" target="_blank" class="list-item">
+            <span class="item-name">VANDERBILT FUSION PROJECT</span>
+            <span class="item-desc">Hardware & Software Control Systems</span>
+            <span class="arrow">↗</span>
+          </a>
+          <a href="https://github.com/masonanton/fusion-control-panel" target="_blank" class="list-item">
+            <span class="item-name">FUSION CONTROL SOFTWARE</span>
+            <span class="item-desc">GUI for High Voltage Management</span>
+            <span class="arrow">↗</span>
+          </a>
+          <a href="https://github.com/masonanton/VFP-Simulations" target="_blank" class="list-item">
+            <span class="item-name">NEUTRONICS SIMULATION</span>
+            <span class="item-desc">Physics Simulation Code</span>
+            <span class="arrow">↗</span>
+          </a>
+          <a href="deepdive.html" class="list-item">
+            <span class="item-name">SIMULATION DEEP DIVE</span>
+            <span class="item-desc">A case study of my internship work</span>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://github.com/masonanton/cli-text-editor" target="_blank" class="list-item">
+            <span class="item-name">CLI TEXT EDITOR</span>
+            <span class="item-desc">Built in Python as a fun project</span>
+            <span class="arrow">↗</span>
+          </a>
+          <a href="https://www.openpowerlifting.org/u/masonanton" target="_blank" class="list-item">
+            <span class="item-name">POWERLIFTING MEETS</span>
+            <span class="item-desc">Competition History</span>
+            <span class="arrow">↗</span>
+          </a>
+          <a href="images/Mason Anton Resume.pdf" target="_blank" class="list-item highlight-item">
+            <span class="item-name">RESUME.PDF</span>
+            <span class="item-desc">Open Full Resume</span>
+            <span class="arrow">↓</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Resume -->
-    <section id="resume" class="section">
-      <div class="text-box">
-        <h2>Resume</h2>
-        <div class="pdf-container">
-          <iframe src="images/Mason Anton Resume.pdf"></iframe>
-          <a href="images/Mason Anton Resume.pdf" target="_blank" class="pdf-overlay">Open full resume</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="section">
-      <div class="text-box">
-        <h2>Contact</h2>
-        <p>Shoot me an email at <a href="mailto:masonanton1@gmail.com">masonanton1@gmail.com</a></p>
+    <section id="contact">
+      <div class="container text-center">
+        <h2 class="section-title">STATUS</h2>
+        <p class="large-text">
+          CURRENTLY BASED IN NASHVILLE.<br>
+          STUDYING ABROAD IN PARIS (SPRING '26).
+        </p>
+        <br>
+        <a href="mailto:masonanton1@gmail.com" class="btn big-btn">MASONANTON1@GMAIL.COM</a>
       </div>
     </section>
   </main>
 
+  <footer>
+    <p>© 2025 MASON ANTON.</p>
+  </footer>
+
   <script type="module" src="script.js"></script>
 </body>
-
 </html>

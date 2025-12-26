@@ -1,110 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deep Dive — Mock Carousel Simulation API</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap"
-        rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deep Dive — Mock Carousel</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <div id="starCanvasContainer"></div>
-    <div id="customCursor"></div>
+  <div id="starCanvasContainer"></div>
 
-    <header>
-        <div class="header-container">
-            <h1>Mason Anton</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#experience">Experience</a></li>
-                    <li><a href="index.html#projects">Projects</a></li>
-                    <li><a href="index.html#resume">Resume</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <nav>
+    <div class="nav-content">
+      <div class="logo">MASON ANTON</div>
+      <ul class="nav-links">
+        <li><a href="index.html#home">HOME</a></li>
+        <li><a href="index.html#experience">EXP</a></li>
+        <li><a href="index.html#projects">WORK</a></li>
+        <li><a href="index.html#contact">CONTACT</a></li>
+      </ul>
+    </div>
+  </nav>
 
-    <main>
-        <section id="deep-dive" class="section">
-            <div class="text-box left deep-dive">
-                <h2>Deep Dive — Mock Carousel Simulation API</h2>
+  <main>
+    <section>
+      <div class="container deep-dive-content">
+        <a href="index.html#projects" class="btn" style="margin-bottom: 40px;">← BACK</a>
+        
+        <h1 style="font-size: 2.5rem; margin-bottom: 20px; line-height: 1.1;">DEEP DIVE: MOCK CAROUSEL SIMULATION API</h1>
 
-            <h3>The Challenge</h3>
-            <ul>
-                <li>Testing real automated parking carousels was costly and risky.</li>
-                <li>The old “simulator” skipped sensors and fault states → gave false confidence.</li>
-                <li>Needed something that captured hundreds of interconnected states.</li>
-            </ul>
+        <h3>THE CHALLENGE</h3>
+        <ul>
+          <li>Testing real automated parking carousels was costly and risky.</li>
+          <li>The old “simulator” skipped sensors and fault states → gave false confidence.</li>
+          <li>Needed something that captured hundreds of interconnected states.</li>
+        </ul>
 
-            <h3>My Approach (Iteration 1)</h3>
-            <p>I started by treating the carousel as a living state machine, mapping every signal: inverter trips,
-                drive status, pallet occupancy, door sensors. JSON dumps became my blueprint.</p>
+        <hr style="border: 1px solid #000; margin: 30px 0;">
 
-            <figure>
-                <img src="images/uml1.0.jpeg"
-                    alt="First iteration UML: detailed class model with PLC, sensors, doors, pallets, and JSON mapping"
-                    width="650">
-                <figcaption><strong>First Iteration.</strong> Exhaustive model that mirrored JSON structure
-                    one-to-one.</figcaption>
-            </figure>
+        <h3>MY APPROACH (ITERATION 1)</h3>
+        <p>I started by treating the carousel as a living state machine, mapping every signal: inverter trips, drive status, pallet occupancy, door sensors. JSON dumps became my blueprint.</p>
 
-            <ul>
-                <li>Modeled every component: PLC, sensors, pallets, doors, status objects.</li>
-                <li>Powerful, but <em>too heavy</em> — changes meant plumbing through layers.</li>
-                <li>Simulator reflected API fields more than real machine behavior.</li>
-            </ul>
+        <figure>
+          <img src="images/uml1.0.jpeg" alt="First iteration UML">
+          <figcaption><strong>First Iteration.</strong> Exhaustive model that mirrored JSON structure one-to-one.</figcaption>
+        </figure>
 
-            <h3>The Refactor (Iteration 2)</h3>
-            <p>After a few days, I stepped back and asked: what are the verbs and invariants?</p>
+        <ul>
+          <li>Modeled every component: PLC, sensors, pallets, doors, status objects.</li>
+          <li>Powerful, but <em>too heavy</em> — changes meant plumbing through layers.</li>
+          <li>Simulator reflected API fields more than real machine behavior.</li>
+        </ul>
 
-            <ul>
-                <li>Rotate to bay N.</li>
-                <li>Open door only if safe.</li>
-                <li>Reserve a pallet.</li>
-                <li>Fail closed on alarm.</li>
-            </ul>
+        <hr style="border: 1px solid #000; margin: 30px 0;">
 
-            <figure>
-                <img src="images/uml2.0.jpeg" alt="Second iteration UML: simplified with PLC, Carousel, Door, Pallets"
-                    width="650">
-                <figcaption><strong>Second Iteration.</strong> Simplified: PLC orchestrates, Carousel owns motion &
-                    sensors, Door enforces interlocks, Pallets form a list.</figcaption>
-            </figure>
+        <h3>THE REFACTOR (ITERATION 2)</h3>
+        <p>After a few days, I stepped back and asked: what are the verbs and invariants?</p>
+        <ul>
+            <li>Rotate to bay N.</li>
+            <li>Open door only if safe.</li>
+            <li>Reserve a pallet.</li>
+            <li>Fail closed on alarm.</li>
+        </ul>
 
-            <ul>
-                <li>Collapsed classes, tightened responsibilities.</li>
-                <li>Commands drove explicit state transitions → clearer, safer.</li>
-                <li>Edge cases became scenarios: inverter trip mid-rotation, door sensor mismatch, simultaneous
-                    entries.</li>
-                <li>Deterministic logs allowed easy replay and debugging.</li>
-            </ul>
+        <figure>
+          <img src="images/uml2.0.jpeg" alt="Second iteration UML">
+          <figcaption><strong>Second Iteration.</strong> Simplified: PLC orchestrates, Carousel owns motion & sensors, Door enforces interlocks.</figcaption>
+        </figure>
 
-            <h3>The Reality We Simulated</h3>
-            <figure>
-                <img src="images/parking carousel.jpg" alt="Real automated parking carousel system" width="650">
-                <figcaption><strong>The Target Reality.</strong> Full-scale parking carousel — the system my
-                    simulation had to mirror safely in software.</figcaption>
-            </figure>
+        <ul>
+          <li>Collapsed classes, tightened responsibilities.</li>
+          <li>Commands drove explicit state transitions → clearer, safer.</li>
+          <li>Edge cases became scenarios: inverter trip mid-rotation, door sensor mismatch, simultaneous entries.</li>
+          <li>Deterministic logs allowed easy replay and debugging.</li>
+        </ul>
 
-            <h3>Impact</h3>
-            <ul>
-                <li>Simulation “felt real” — trusted enough to run in CI pipelines.</li>
-                <li>Cycle times dropped dramatically.</li>
-                <li>New features prototyped without touching hardware.</li>
-                <li>Foundation for scaling to tandem carousels, gates, and future variations.</li>
-            </ul>
-        </section>
-    </main>
+        <hr style="border: 1px solid #000; margin: 30px 0;">
 
-    <script type="module" src="script.js"></script>
+        <h3>THE REALITY WE SIMULATED</h3>
+        <figure>
+          <img src="images/parking carousel.jpg" alt="Real automated parking carousel">
+          <figcaption><strong>The Target Reality.</strong> Full-scale parking carousel — the system my simulation had to mirror safely in software.</figcaption>
+        </figure>
+
+        <h3>IMPACT</h3>
+        <ul>
+          <li>Simulation “felt real” — trusted enough to run in CI pipelines.</li>
+          <li>Cycle times dropped dramatically.</li>
+          <li>New features prototyped without touching hardware.</li>
+          <li>Foundation for scaling to tandem carousels, gates, and future variations.</li>
+        </ul>
+
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="script.js"></script>
 </body>
-
 </html>
