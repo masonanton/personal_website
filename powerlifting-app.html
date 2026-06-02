@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Social Powerlifting App — Mason Anton</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .pl-section-title {
+      font-size: 1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: #000;
+      color: #fff;
+      display: inline-block;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+      margin-top: 36px;
+    }
+
+    .pl-divider {
+      border: none;
+      border-top: 1px solid #000;
+      margin: 32px 0;
+    }
+
+    /* Vertical video container (9:16) */
+    .video-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0 8px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 320px;
+      aspect-ratio: 9 / 16;
+      background: #000;
+      border: var(--border);
+      box-shadow: 6px 6px 0 #000;
+      overflow: hidden;
+    }
+
+    .video-container video,
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+      gap: 12px;
+    }
+
+    .video-placeholder .play-icon {
+      font-size: 3rem;
+      opacity: 0.5;
+    }
+
+    /* Screenshots grid */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .screenshot-slot {
+      aspect-ratio: 9 / 16;
+      background: #f0f0f0;
+      border: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #666;
+      font-family: var(--font-main);
+      text-align: center;
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    .screenshot-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: none !important;
+      margin: 0 !important;
+    }
+
+    /* Tech stack table */
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.9rem;
+    }
+
+    .tech-table th,
+    .tech-table td {
+      border: 1px solid #000;
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    .tech-table th {
+      background: #000;
+      color: #fff;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .tech-table tr:nth-child(even) td {
+      background: #f8f8f8;
+    }
+
+    @media (max-width: 600px) {
+      .screenshots-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .video-container {
+        width: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="starCanvasContainer"></div>
+
+  <nav>
+    <div class="nav-content">
+      <div class="logo">MASON ANTON</div>
+      <ul class="nav-links">
+        <li><a href="index.html#home">HOME</a></li>
+        <li><a href="index.html#experience">EXP</a></li>
+        <li><a href="index.html#projects">WORK</a></li>
+        <li><a href="index.html#contact">CONTACT</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section>
+      <div class="container deep-dive-content">
+        <a href="index.html#projects" class="btn" style="margin-bottom: 40px;">← BACK</a>
+
+        <h1 style="font-size: 2.5rem; margin-bottom: 8px; line-height: 1.1;">THE SOCIAL POWERLIFTING APP</h1>
+        <p style="font-size: 0.9rem; margin-bottom: 32px; opacity: 0.7;">Full-stack social fitness platform · React 19 · Supabase · Cloudflare R2 · Vercel</p>
+
+        <hr class="pl-divider">
+
+        <!-- VIDEO -->
+        <div class="pl-section-title">OVERVIEW VIDEO</div>
+        <div class="video-wrap">
+          <div class="video-container">
+            <!-- Replace the placeholder below with a <video> or <iframe> embed once you have the file -->
+            <!-- Example for a local video:
+                 <video controls playsinline>
+                   <source src="videos/powerlifting-app-demo.mp4" type="video/mp4">
+                 </video>
+            -->
+            <!-- Example for a YouTube Short:
+                 <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+            -->
+            <video controls playsinline>
+              <source src="images\the-social-powerlifting-app-demo.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <p style="font-size: 0.8rem; font-style: italic; text-align: center; margin-bottom: 32px; opacity: 0.6;">~3 minute walkthrough of the app</p>
+
+        <hr class="pl-divider">
+
+        <!-- ABOUT -->
+        <div class="pl-section-title">ABOUT</div>
+        <p>A full-stack social fitness platform built from scratch for powerlifters — log training sessions, track PRs, compete on leaderboards, and follow each other's progress. Every feature was designed around how powerlifters actually train.</p>
+
+        <hr class="pl-divider">
+
+        <!-- TECH STACK -->
+        <div class="pl-section-title">TECH STACK</div>
+        <table class="tech-table">
+          <thead>
+            <tr><th>Layer</th><th>Technology</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frontend</td><td>React 19, TypeScript, Vite, Tailwind CSS v4</td></tr>
+            <tr><td>UI Components</td><td>shadcn/ui, Radix UI, Lucide React</td></tr>
+            <tr><td>Charts</td><td>Recharts</td></tr>
+            <tr><td>Backend / DB</td><td>Supabase (PostgreSQL 17, Auth, Storage, Edge Functions)</td></tr>
+            <tr><td>Media Storage</td><td>Cloudflare R2</td></tr>
+            <tr><td>Deployment</td><td>Vercel</td></tr>
+          </tbody>
+        </table>
+
+        <hr class="pl-divider">
+
+        <!-- FEATURES -->
+        <div class="pl-section-title">FEATURES</div>
+        <ul>
+          <li><strong>Workout Logging</strong> — Log lifts by type (Squat, Bench, Deadlift, etc.), track sets with weight, reps &amp; RPE, tag set types, attach photos/videos, log bodyweight.</li>
+          <li><strong>Progress Tracking</strong> — Automatic PR detection with celebration animations, 1RM estimation, per-lift progress charts, volume over time, calendar view.</li>
+          <li><strong>Powerlifting Meets</strong> — Record competition attempts, attach media per lift, countdown to upcoming meets, meet celebration on completion.</li>
+          <li><strong>Social</strong> — Follow/unfollow lifters, like and comment on workouts, activity feed, public/private accounts, user search, in-app notifications.</li>
+          <li><strong>Leaderboard</strong> — Global rankings by lift based on best 1RM or meet results.</li>
+          <li><strong>Settings</strong> — Weight unit preference (lbs/kg) with automatic conversion throughout, profile customization.</li>
+        </ul>
+
+        <hr class="pl-divider">
+
+        <!-- ARCHITECTURE NOTE -->
+        <div class="pl-section-title">MEDIA STORAGE</div>
+        <p>Photos and videos are stored in Cloudflare R2. Uploads go through a Supabase Edge Function that returns a short-lived presigned URL — the client uploads directly to R2 without routing through Supabase Storage. Deletes follow the same pattern via a second Edge Function.</p>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MASON ANTON.</p>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
